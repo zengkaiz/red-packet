@@ -15,4 +15,19 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    // 优化构建输出
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // 分离第三方库
+          vendor: ['react', 'react-dom'],
+          wagmi: ['wagmi', 'viem', '@tanstack/react-query'],
+          antd: ['antd', '@ant-design/icons'],
+        },
+      },
+    },
+    // 增加 chunk 大小警告阈值
+    chunkSizeWarningLimit: 1000,
+  },
 });
